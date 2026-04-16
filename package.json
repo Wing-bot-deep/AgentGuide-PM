@@ -1,0 +1,14 @@
+{
+  "name": "agentguide-pm",
+  "version": "1.0.0",
+  "description": "AI 产品经理学习 + 求职 + AI 工具一体化平台",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.3"
+  }
+}
