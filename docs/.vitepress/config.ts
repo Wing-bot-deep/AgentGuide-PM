@@ -41,7 +41,16 @@ export default defineConfig({
           items: [
             { text: '概览', link: '/02-tech/' },
             { text: 'A. 代码生存技能', link: '/02-tech/A-coding/' },
-            { text: 'B. AI 技术认知', link: '/02-tech/B-ai-tech/' },
+            {
+              text: 'B. AI 技术认知',
+              collapsed: false,
+              items: [
+                { text: '概览', link: '/02-tech/B-ai-tech/' },
+                { text: 'Context Engineering', link: '/02-tech/B-ai-tech/01-context-engineering' },
+                { text: 'Agent 记忆系统', link: '/02-tech/B-ai-tech/02-agent-memory' },
+                { text: 'Agent 评估体系', link: '/02-tech/B-ai-tech/03-agent-evaluation' },
+              ],
+            },
             { text: 'C. 技术沟通能力', link: '/02-tech/C-communication/' },
           ],
         },
@@ -68,6 +77,10 @@ export default defineConfig({
           items: [
             { text: '概览', link: '/05-interview/' },
             { text: '🔴 必考题精讲', link: '/05-interview/01-must-know' },
+            { text: '🟠 高概率题库', link: '/05-interview/02-high-prob' },
+            { text: '🟡 潜力题 & 场景题', link: '/05-interview/03-potential' },
+            { text: '🔵 前沿趋势开放题', link: '/05-interview/04-trends' },
+            { text: '🏢 大厂面试规律', link: '/05-interview/05-company-cases' },
             { text: '🤖 AI 面试工具箱', link: '/05-interview/tools' },
           ],
         },
@@ -77,9 +90,14 @@ export default defineConfig({
           text: '06 求职方法论',
           items: [
             { text: '概览', link: '/06-career/' },
+            { text: '📍 职业路径规划', link: '/06-career/01-career-path' },
+            { text: '📄 简历撰写指南', link: '/06-career/02-resume-guide' },
             { text: '✨ AI 简历润色器', link: '/06-career/03-resume-polish' },
             { text: '🎤 面试逐字稿生成器', link: '/06-career/04-interview-script' },
             { text: '🤖 AI 模拟面试', link: '/06-career/05-mock-interview' },
+            { text: '💼 作品集搭建', link: '/06-career/06-portfolio' },
+            { text: '💰 谈薪实战指南', link: '/06-career/07-salary' },
+            { text: '👔 HR 面试通关', link: '/06-career/08-hr-interview' },
           ],
         },
       ],
