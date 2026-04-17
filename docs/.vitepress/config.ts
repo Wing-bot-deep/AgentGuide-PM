@@ -67,6 +67,8 @@ export default defineConfig({
           text: '05 面试题库 PM 版',
           items: [
             { text: '概览', link: '/05-interview/' },
+            { text: '🔴 必考题精讲', link: '/05-interview/01-must-know' },
+            { text: '🤖 AI 面试工具箱', link: '/05-interview/tools' },
           ],
         },
       ],
@@ -75,6 +77,9 @@ export default defineConfig({
           text: '06 求职方法论',
           items: [
             { text: '概览', link: '/06-career/' },
+            { text: '✨ AI 简历润色器', link: '/06-career/03-resume-polish' },
+            { text: '🎤 面试逐字稿生成器', link: '/06-career/04-interview-script' },
+            { text: '🤖 AI 模拟面试', link: '/06-career/05-mock-interview' },
           ],
         },
       ],

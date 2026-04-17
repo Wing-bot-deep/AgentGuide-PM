@@ -1,0 +1,149 @@
+/* 全局自定义样式 */
+
+/* AI 工具卡片容器 */
+.ai-tool-card {
+  border: 1px solid var(--vp-c-border);
+  border-radius: 12px;
+  padding: 24px;
+  margin: 24px 0;
+  background: var(--vp-c-bg-soft);
+}
+
+.ai-tool-card h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  color: var(--vp-c-brand-1);
+}
+
+/* 输入框统一样式 */
+.ai-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.ai-input:focus {
+  outline: none;
+  border-color: var(--vp-c-brand-1);
+}
+
+textarea.ai-input {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+/* 按钮 */
+.ai-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: var(--vp-c-brand-1);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.ai-btn:hover {
+  background: var(--vp-c-brand-2);
+}
+
+.ai-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ai-btn-secondary {
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  border: 1px solid var(--vp-c-border);
+}
+
+.ai-btn-secondary:hover {
+  background: var(--vp-c-bg-soft);
+}
+
+/* 输出区域 */
+.ai-output {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-border);
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  min-height: 60px;
+}
+
+/* 标签组 */
+.ai-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+
+.ai-label:first-child {
+  margin-top: 0;
+}
+
+/* 状态提示 */
+.ai-status {
+  font-size: 13px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-top: 12px;
+}
+
+.ai-status.success {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.ai-status.error {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.ai-status.loading {
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-2);
+}
+
+/* select */
+.ai-select {
+  padding: 8px 12px;
+  border: 1px solid var(--vp-c-border);
+  border-radius: 8px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* 分组行 */
+.ai-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.ai-row .ai-input {
+  flex: 1;
+}
