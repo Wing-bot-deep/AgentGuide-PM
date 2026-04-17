@@ -32,6 +32,10 @@ export default defineConfig({
           text: '01 基础认知层',
           items: [
             { text: '概览', link: '/01-foundation/' },
+            { text: '🤖 Agent 是什么', link: '/01-foundation/01-agent-concept' },
+            { text: '🧠 大模型原理（PM 版）', link: '/01-foundation/02-llm-principles' },
+            { text: '📈 AI 技术演进路线图', link: '/01-foundation/03-tech-evolution' },
+            { text: '🎯 AI PM 的技术边界', link: '/01-foundation/04-pm-tech-boundary' },
           ],
         },
       ],

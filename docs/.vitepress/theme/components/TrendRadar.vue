@@ -1,0 +1,235 @@
+<template>
+  <div class="ai-tool-card">
+    <h3>📡 前沿速递雷达</h3>
+    <p style="font-size:13px;color:var(--vp-c-text-2);margin-top:-8px;margin-bottom:16px;">
+      输入你关注的方向，AI 帮你梳理前沿动态 + 面试加分点
+    </p>
+
+    <!-- 话题选择 -->
+    <label class="ai-label">选择关注方向（可多选）</label>
+    <div class="topic-grid">
+      <button
+        v-for="topic in topics"
+        :key="topic.key"
+        class="topic-btn"
+        :class="{ active: selectedTopics.includes(topic.key) }"
+        @click="toggleTopic(topic.key)"
+        :disabled="loading"
+      >
+        {{ topic.label }}
+      </button>
+    </div>
+
+    <!-- 自定义补充 -->
+    <label class="ai-label" style="margin-top:16px;">补充关键词（可选）</label>
+    <input
+      v-model="customKeyword"
+      class="ai-input"
+      style="min-height:auto;padding:8px 12px;"
+      placeholder="如：多模态、端侧推理、Agent安全..."
+      :disabled="loading"
+    />
+
+    <!-- 输出格式选择 -->
+    <label class="ai-label" style="margin-top:16px;">输出格式</label>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px;">
+      <button
+        v-for="fmt in formats"
+        :key="fmt.key"
+        class="topic-btn"
+        :class="{ active: selectedFormat === fmt.key }"
+        @click="selectedFormat = fmt.key"
+        :disabled="loading"
+        style="font-size:12px;"
+      >
+        {{ fmt.label }}
+      </button>
+    </div>
+
+    <div style="margin-top:16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <button class="ai-btn" @click="generate" :disabled="loading || selectedTopics.length === 0">
+        {{ loading ? '⏳ 扫描中...' : '🔍 开始扫描' }}
+      </button>
+      <button v-if="output" class="ai-btn ai-btn-secondary" @click="copy">
+        {{ copied ? '✅ 已复制' : '📋 复制结果' }}
+      </button>
+      <button v-if="output" class="ai-btn ai-btn-secondary" @click="reset">重置</button>
+    </div>
+
+    <!-- 错误提示 -->
+    <div v-if="error" class="ai-status error" style="margin-top:12px;">{{ error }}</div>
+
+    <!-- 输出区 -->
+    <div v-if="output || loading" class="ai-output" style="margin-top:16px;min-height:100px;">
+      <span v-if="loading && !output" class="ai-status loading">正在扫描前沿动态...</span>
+      <div v-html="renderedOutput" />
+    </div>
+
+    <p style="margin-top:12px;font-size:12px;color:var(--vp-c-text-3);">
+      💡 AI 知识截止 2025 年初，适合整理认知框架和面试答题素材，实时动态请结合最新新闻
+    </p>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import { useApiKey } from '../composables/useApiKey'
+
+const { callAI, isConfigured } = useApiKey()
+
+const topics = [
+  { key: 'agent', label: '🤖 Agent 进展' },
+  { key: 'multiagent', label: '👥 Multi-Agent' },
+  { key: 'multimodal', label: '🖼️ 多模态' },
+  { key: 'rag', label: '📚 RAG / 知识库' },
+  { key: 'product', label: '📱 AI 产品动态' },
+  { key: 'model', label: '🧠 模型能力' },
+  { key: 'safety', label: '🛡️ AI 安全合规' },
+  { key: 'coding', label: '💻 AI 编程工具' },
+]
+
+const formats = [
+  { key: 'brief', label: '速览摘要' },
+  { key: 'interview', label: '面试加分版' },
+  { key: 'deep', label: '深度解读' },
+]
+
+const selectedTopics = ref<string[]>([])
+const selectedFormat = ref('interview')
+const customKeyword = ref('')
+const output = ref('')
+const loading = ref(false)
+const error = ref('')
+const copied = ref(false)
+
+function toggleTopic(key: string) {
+  const idx = selectedTopics.value.indexOf(key)
+  if (idx >= 0) {
+    selectedTopics.value.splice(idx, 1)
+  } else {
+    selectedTopics.value.push(key)
+  }
+}
+
+const renderedOutput = computed(() => {
+  if (!output.value) return ''
+  return output.value
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n/g, '<br/>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/^## (.+)$/gm, '<h4 style="margin:16px 0 8px;font-size:15px;color:var(--vp-c-brand)">$1</h4>')
+    .replace(/^### (.+)$/gm, '<h5 style="margin:12px 0 6px;font-size:14px;">$1</h5>')
+    .replace(/^- (.+)$/gm, '<li style="margin:4px 0">$1</li>')
+    .replace(/(<li[^>]*>.*<\/li>)/gs, '<ul style="padding-left:20px;margin:8px 0">$1</ul>')
+})
+
+const topicLabels: Record<string, string> = {
+  agent: 'Agent 技术进展',
+  multiagent: 'Multi-Agent 协作',
+  multimodal: '多模态 AI',
+  rag: 'RAG 与知识库技术',
+  product: 'AI 产品动态',
+  model: '大模型能力演进',
+  safety: 'AI 安全与合规',
+  coding: 'AI 编程工具',
+}
+
+const formatPrompts: Record<string, string> = {
+  brief: '请以简洁的要点形式输出，每个方向 3-5 条核心动态，用 emoji 标注重要程度。',
+  interview: `请以 AI PM 面试备考的视角输出，重点包括：
+1. 该方向的核心技术进展（1-2个代表性案例）
+2. 对 AI PM 的影响（产品机会/挑战）
+3. 面试加分话术（可以直接在面试中使用的表达）
+每个方向约 200 字。`,
+  deep: `请深入解读，包括：技术背景、发展脉络、主要玩家、产品机会、潜在风险，每个方向约 400 字。`,
+}
+
+async function generate() {
+  if (!isConfigured()) {
+    error.value = '请先在页面顶部配置 API Key'
+    return
+  }
+
+  const topicNames = selectedTopics.value.map(k => topicLabels[k]).join('、')
+  const extra = customKeyword.value.trim() ? `，以及补充关键词：${customKeyword.value}` : ''
+
+  const prompt = `你是一个专注于 AI 领域的产品经理培训专家，熟悉 2024-2025 年的 AI 技术和产品动态。
+
+请针对以下方向提供前沿动态速递：${topicNames}${extra}
+
+${formatPrompts[selectedFormat.value]}
+
+输出格式要求：
+- 每个方向用 ## 作为标题
+- 内容结构清晰，使用列表或小标题
+- 重点内容加粗
+- 语言简洁专业，适合 AI PM 学习使用
+- 结尾附加一条"面试关联提示"（这个话题在什么类型的面试题中会考到）`
+
+  output.value = ''
+  error.value = ''
+  loading.value = true
+
+  await callAI(
+    [{ role: 'user', content: prompt }],
+    (chunk) => { output.value += chunk },
+    () => { loading.value = false },
+    (err) => {
+      error.value = err
+      loading.value = false
+    }
+  )
+}
+
+async function copy() {
+  try {
+    await navigator.clipboard.writeText(output.value)
+    copied.value = true
+    setTimeout(() => { copied.value = false }, 2000)
+  } catch {
+    error.value = '复制失败，请手动选中复制'
+  }
+}
+
+function reset() {
+  output.value = ''
+  error.value = ''
+  copied.value = false
+}
+</script>
+
+<style scoped>
+.topic-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.topic-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--vp-c-divider);
+  background: transparent;
+  color: var(--vp-c-text-1);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.15s;
+}
+
+.topic-btn:hover:not(:disabled) {
+  border-color: var(--vp-c-brand);
+  color: var(--vp-c-brand);
+}
+
+.topic-btn.active {
+  background: var(--vp-c-brand);
+  border-color: var(--vp-c-brand);
+  color: #fff;
+}
+
+.topic-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+</style>

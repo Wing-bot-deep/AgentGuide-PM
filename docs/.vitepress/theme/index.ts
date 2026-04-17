@@ -4,6 +4,7 @@ import JdQuizGenerator from './components/JdQuizGenerator.vue'
 import MockInterviewer from './components/MockInterviewer.vue'
 import ResumePolisher from './components/ResumePolisher.vue'
 import InterviewScript from './components/InterviewScript.vue'
+import TrendRadar from './components/TrendRadar.vue'
 import './style.css'
 
 export default {
@@ -15,5 +16,6 @@ export default {
     app.component('MockInterviewer', MockInterviewer)
     app.component('ResumePolisher', ResumePolisher)
     app.component('InterviewScript', InterviewScript)
+    app.component('TrendRadar', TrendRadar)
   }
 }
