@@ -80,6 +80,9 @@ export default defineConfig({
           text: '03 行业资源导航',
           items: [
             { text: '概览', link: '/03-resources/' },
+            { text: '🧩 框架与生态地图', link: '/03-resources/01-frameworks' },
+            { text: '📦 产品案例库', link: '/03-resources/02-cases' },
+            { text: '📚 阅读清单', link: '/03-resources/03-reading' },
           ],
         },
       ],
@@ -88,6 +91,9 @@ export default defineConfig({
           text: '04 产品实战层',
           items: [
             { text: '概览', link: '/04-product/' },
+            { text: '🎨 AI 产品设计方法论', link: '/04-product/01-design-methodology' },
+            { text: '📊 AI 产品指标体系', link: '/04-product/02-metrics' },
+            { text: '✨ AI 体验设计', link: '/04-product/03-experience' },
           ],
         },
       ],
