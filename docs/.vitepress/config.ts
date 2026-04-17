@@ -44,7 +44,15 @@ export default defineConfig({
           text: '02 技术理解层',
           items: [
             { text: '概览', link: '/02-tech/' },
-            { text: 'A. 代码生存技能', link: '/02-tech/A-coding/' },
+            {
+              text: 'A. 代码生存技能',
+              collapsed: false,
+              items: [
+                { text: '概览', link: '/02-tech/A-coding/' },
+                { text: '👁️ 读懂代码', link: '/02-tech/A-coding/01-read-code' },
+                { text: '💻 终端生存指南', link: '/02-tech/A-coding/02-terminal-survival' },
+              ],
+            },
             {
               text: 'B. AI 技术认知',
               collapsed: false,
@@ -55,7 +63,15 @@ export default defineConfig({
                 { text: 'Agent 评估体系', link: '/02-tech/B-ai-tech/03-agent-evaluation' },
               ],
             },
-            { text: 'C. 技术沟通能力', link: '/02-tech/C-communication/' },
+            {
+              text: 'C. 技术沟通能力',
+              collapsed: false,
+              items: [
+                { text: '概览', link: '/02-tech/C-communication/' },
+                { text: '📝 写给工程师的 PRD', link: '/02-tech/C-communication/01-prd-for-engineers' },
+                { text: '🔍 技术方案评审', link: '/02-tech/C-communication/02-tech-review' },
+              ],
+            },
           ],
         },
       ],
