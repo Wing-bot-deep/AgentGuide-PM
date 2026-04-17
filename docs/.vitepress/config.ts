@@ -94,6 +94,7 @@ export default defineConfig({
             { text: '🎨 AI 产品设计方法论', link: '/04-product/01-design-methodology' },
             { text: '📊 AI 产品指标体系', link: '/04-product/02-metrics' },
             { text: '✨ AI 体验设计', link: '/04-product/03-experience' },
+            { text: '🛠️ Vibe Coding 实战项目', link: '/04-product/04-vibe-coding' },
           ],
         },
       ],
