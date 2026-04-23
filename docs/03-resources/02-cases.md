@@ -160,6 +160,17 @@ description: 国内外 AI 产品典型案例拆解，覆盖 To B / To C / 平台
 
 ---
 
+---
+
+## 🔍 AI 竞品分析辅助
+
+> 输入产品名称和分析维度，AI 帮你生成结构化竞品分析报告
+
+<ApiKeyManager />
+<CompetitorAnalyzer />
+
+---
+
 ## 延伸阅读
 
 - [框架与生态地图](./01-frameworks)

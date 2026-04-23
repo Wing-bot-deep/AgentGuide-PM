@@ -5,6 +5,8 @@ import MockInterviewer from './components/MockInterviewer.vue'
 import ResumePolisher from './components/ResumePolisher.vue'
 import InterviewScript from './components/InterviewScript.vue'
 import TrendRadar from './components/TrendRadar.vue'
+import CompetitorAnalyzer from './components/CompetitorAnalyzer.vue'
+import PrdGenerator from './components/PrdGenerator.vue'
 import './style.css'
 
 export default {
@@ -17,5 +19,7 @@ export default {
     app.component('ResumePolisher', ResumePolisher)
     app.component('InterviewScript', InterviewScript)
     app.component('TrendRadar', TrendRadar)
+    app.component('CompetitorAnalyzer', CompetitorAnalyzer)
+    app.component('PrdGenerator', PrdGenerator)
   }
 }
