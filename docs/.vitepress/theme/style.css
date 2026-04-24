@@ -147,3 +147,79 @@ textarea.ai-input {
 .ai-row .ai-input {
   flex: 1;
 }
+
+/* ===== React.dev 风格 custom-block ===== */
+
+/* intro 块：页首学习目标 */
+.intro {
+  border: 1px solid var(--vp-c-brand-2);
+  border-left: 4px solid var(--vp-c-brand-1);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  background: var(--vp-c-brand-soft);
+}
+
+.intro p {
+  margin: 0;
+}
+
+/* exercise 块：互动练习 */
+.exercise {
+  border: 1px solid var(--vp-c-yellow-2);
+  border-left: 4px solid var(--vp-c-yellow-1);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  background: var(--vp-c-yellow-soft);
+}
+
+.exercise > *:first-child {
+  margin-top: 0;
+}
+
+.exercise > *:last-child {
+  margin-bottom: 0;
+}
+
+/* tip custom-block（手写 HTML 形式） */
+div.tip.custom-block,
+.tip.custom-block {
+  border: 1px solid var(--vp-c-green-2);
+  border-left: 4px solid var(--vp-c-green-1);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  background: var(--vp-c-green-soft);
+}
+
+div.tip.custom-block > *:first-child,
+.tip.custom-block > *:first-child {
+  margin-top: 0;
+}
+
+div.tip.custom-block > *:last-child,
+.tip.custom-block > *:last-child {
+  margin-bottom: 0;
+}
+
+/* warning custom-block（手写 HTML 形式） */
+div.warning.custom-block,
+.warning.custom-block {
+  border: 1px solid var(--vp-c-warning-2);
+  border-left: 4px solid var(--vp-c-warning-1);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  background: var(--vp-c-warning-soft);
+}
+
+div.warning.custom-block > *:first-child,
+.warning.custom-block > *:first-child {
+  margin-top: 0;
+}
+
+div.warning.custom-block > *:last-child,
+.warning.custom-block > *:last-child {
+  margin-bottom: 0;
+}
