@@ -39,15 +39,20 @@
 - [x] 04-product/04-vibe-coding.md（5个实战项目/简历写法/工具选择）
 
 **内容深度改造 ✅**
-- [x] 02-high-prob.md RAG Q1-Q11 补六段式完整答案（押题依据/标准答案/前沿加分/常见踩坑/回答策略）
+- [x] 02-high-prob.md RAG Q1-Q11 补六段式完整答案
 - [x] 02-high-prob.md RAG Q12-Q22（大厂真题）补六段式答案
 - [x] 02-high-prob.md Agent Q1-Q22 补六段式答案
 - [x] 02-high-prob.md 模型评估 Q1-Q10 补六段式答案
 
+**React.dev 风格改造 ✅**
+- [x] 02-tech/B-ai-tech（上下文工程/Agent记忆/Agent评估）— intro块+互动练习+检查点
+- [x] 02-tech/C-communication（PRD模板/技术方案评审）— intro块+互动练习+检查点
+- [x] 04-product（设计方法论/指标体系/AI体验设计）— intro块+互动练习+检查点
+
 ## 下一步任务
 
-1. **[P0] 验证 02-high-prob.md 所有54道题的答案完整性和格式一致性**
-2. **[P1] 01/02/04 重写为 PM 行动手册风格**（需先和用户讨论每页的行动手册角度）
-3. **[P2] 新建 06-career/02b-resume-examples.md 简历范文示例**（3 种背景 × 完整范文 + 拆解注释）
-4. **[P2] 部署更新后的内容到 GitHub Pages**
+1. **[P1] 01-foundation 4个页面补充互动练习和检查点**（已有 intro 块，缺练习题）
+2. **[P1] 02-tech/A-coding 2个页面补充互动练习和检查点**（已有 intro 块，缺练习题）
+3. **[P2] 部署更新后的内容到 GitHub Pages**（`git push` 触发 Actions）
+4. **[P2] 验证站点线上效果，检查 custom-block 样式是否正常渲染**
 5. **[P3] 优化 TrendRadar 组件的交互体验**
