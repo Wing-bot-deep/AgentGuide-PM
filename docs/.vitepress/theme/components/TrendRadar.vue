@@ -99,14 +99,26 @@
       <div v-html="renderedOutput" />
     </div>
 
+    <!-- 面试问法联想 -->
+    <div v-if="output && !loading && interviewQuestions.length > 0" class="interview-assoc">
+      <div class="interview-assoc-title">💬 这些话题在面试中通常怎么考？</div>
+      <ul class="interview-assoc-list">
+        <li v-for="q in interviewQuestions" :key="q.topic">
+          <span class="assoc-topic">{{ q.topic }}</span>
+          <span class="assoc-question">{{ q.question }}</span>
+        </li>
+      </ul>
+    </div>
+
     <p style="margin-top:12px;font-size:12px;color:var(--vp-c-text-3);">
-      💡 AI 知识截止 2025 年初，适合整理认知框架和面试答题素材，实时动态请结合最新新闻
+      💡 AI 知识截止 2025 年，适合整理认知框架和面试答题素材，实时动态请结合最新新闻
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import { marked } from 'marked'
 import { useApiKey } from '../composables/useApiKey'
 
 const { callAI, isConfigured } = useApiKey()
@@ -135,6 +147,18 @@ const formats = [
   { key: 'deep', label: '深度解读' },
 ]
 
+// 每个话题对应的典型面试问法
+const topicQuestions: Record<string, string> = {
+  agent: '"请描述一个 Agent 失败的场景，你会怎么设计容错机制？"',
+  multiagent: '"如何让多个 Agent 协同工作？举具体的协同机制。"',
+  multimodal: '"多模态产品设计时如何处理不同模态质量不一致的问题？"',
+  rag: '"RAG 和 Fine-tuning 如何选型？各适合什么场景？"',
+  product: '"你怎么看 AI 产品的 PMF？和传统产品有什么不同？"',
+  model: '"大模型能力边界在哪里？作为 PM 你怎么设计降级方案？"',
+  safety: '"AI 产品如何平衡体验和内容安全合规？"',
+  coding: '"AI 编程工具会取代程序员吗？对 PM 的影响是什么？"',
+}
+
 const selectedTopics = ref<string[]>([])
 const selectedFormat = ref('interview')
 const customKeyword = ref('')
@@ -153,7 +177,28 @@ interface HistoryItem {
   time: string
 }
 
-const history = ref<HistoryItem[]>([])
+const HISTORY_KEY = 'trendradar_history'
+
+function loadHistoryFromStorage(): HistoryItem[] {
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY)
+    return raw ? JSON.parse(raw) : []
+  } catch {
+    return []
+  }
+}
+
+const history = ref<HistoryItem[]>(loadHistoryFromStorage())
+
+// 当前选中话题对应的面试问法
+const interviewQuestions = computed(() => {
+  return selectedTopics.value
+    .filter(k => topicQuestions[k])
+    .map(k => ({
+      topic: topics.find(t => t.key === k)?.label || k,
+      question: topicQuestions[k],
+    }))
+})
 
 function toggleTopic(key: string) {
   const idx = selectedTopics.value.indexOf(key)
@@ -170,26 +215,8 @@ function applyPreset(topicKeys: string[]) {
 
 const renderedOutput = computed(() => {
   if (!output.value) return ''
-  let html = output.value
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/\n/g, '<br/>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/^## (.+)$/gm, '<h4 style="margin:16px 0 8px;font-size:15px;color:var(--vp-c-brand)">$1</h4>')
-    .replace(/^### (.+)$/gm, '<h5 style="margin:12px 0 6px;font-size:14px;">$1</h5>')
-    .replace(/^- (.+)$/gm, '<li style="margin:4px 0">$1</li>')
-    .replace(/(<li[^>]*>.*<\/li>)/gs, '<ul style="padding-left:20px;margin:8px 0">$1</ul>')
-
-  // 高亮关键术语
-  const keywords = ['RAG', 'Agent', 'LLM', 'GPT-4', 'Claude', 'Fine-tuning', 'Prompt', 'Multi-Agent', 'RLHF', 'CoT', 'ReAct']
-  keywords.forEach(kw => {
-    const regex = new RegExp(`\\b${kw}\\b`, 'g')
-    html = html.replace(regex, `<span class="keyword-highlight">${kw}</span>`)
-  })
-
-  // 高亮面试加分点
-  html = html.replace(/💡(.+?)(?=<br|<\/p|$)/g, '<span class="interview-tip">💡$1</span>')
-
-  return html
+  // 用 marked 解析，安全起见关掉 mangle/headerIds
+  return marked.parse(output.value, { async: false }) as string
 })
 
 const topicLabels: Record<string, string> = {
@@ -240,7 +267,6 @@ ${formatPrompts[selectedFormat.value]}
   error.value = ''
   loading.value = true
 
-  // 动态加载状态
   const topicList = selectedTopics.value.map(k => topicLabels[k])
   let currentIdx = 0
   const statusInterval = setInterval(() => {
@@ -277,12 +303,17 @@ function saveToHistory() {
     format: selectedFormat.value,
     keyword: customKeyword.value,
     output: output.value,
-    time
+    time,
   })
 
-  // 只保留最近3条
   if (history.value.length > 3) {
     history.value.pop()
+  }
+
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history.value))
+  } catch {
+    // localStorage 不可用时静默失败
   }
 }
 
@@ -433,19 +464,80 @@ function reset() {
   font-size: 11px;
 }
 
-:deep(.keyword-highlight) {
-  color: var(--vp-c-brand);
-  font-weight: 600;
+/* 面试问法联想 */
+.interview-assoc {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--vp-c-yellow-2);
+  border-left: 4px solid var(--vp-c-yellow-1);
+  border-radius: 8px;
+  background: var(--vp-c-yellow-soft);
 }
 
-:deep(.interview-tip) {
-  display: inline-block;
-  padding: 4px 8px;
-  margin: 4px 0;
-  background: var(--vp-c-brand-soft);
-  border-left: 3px solid var(--vp-c-brand);
-  border-radius: 4px;
+.interview-assoc-title {
   font-size: 13px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  margin-bottom: 10px;
+}
+
+.interview-assoc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.interview-assoc-list li {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.assoc-topic {
+  display: inline-block;
+  font-weight: 500;
+  color: var(--vp-c-brand);
+  margin-right: 6px;
+}
+
+.assoc-question {
+  color: var(--vp-c-text-2);
+}
+
+/* marked 输出的 Markdown 样式 */
+:deep(.ai-output h1),
+:deep(.ai-output h2),
+:deep(.ai-output h3),
+:deep(.ai-output h4) {
+  margin: 14px 0 6px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  line-height: 1.4;
+}
+
+:deep(.ai-output h2) { font-size: 15px; color: var(--vp-c-brand); }
+:deep(.ai-output h3) { font-size: 14px; }
+:deep(.ai-output h4) { font-size: 13px; }
+
+:deep(.ai-output ul),
+:deep(.ai-output ol) {
+  padding-left: 20px;
+  margin: 6px 0;
+}
+
+:deep(.ai-output li) { margin: 3px 0; }
+
+:deep(.ai-output p) { margin: 6px 0; }
+
+:deep(.ai-output strong) { color: var(--vp-c-text-1); }
+
+:deep(.ai-output code) {
+  background: var(--vp-c-bg-soft);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 12px;
 }
 
 @media (max-width: 640px) {
