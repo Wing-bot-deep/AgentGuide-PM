@@ -4,7 +4,7 @@
 
 ## 当前阶段
 
-**内容深度改造阶段** — 从"概念扫盲"转向"实战武器库"
+**收尾阶段** — 主体内容全部完成，遗留缺口已清理
 
 ## 已完成
 
@@ -39,8 +39,7 @@
 - [x] 04-product/04-vibe-coding.md（5个实战项目/简历写法/工具选择）
 
 **内容深度改造 ✅**
-- [x] 02-high-prob.md RAG Q1-Q11 补六段式完整答案
-- [x] 02-high-prob.md RAG Q12-Q22（大厂真题）补六段式答案
+- [x] 02-high-prob.md RAG Q1-Q22 补六段式完整答案
 - [x] 02-high-prob.md Agent Q1-Q22 补六段式答案
 - [x] 02-high-prob.md 模型评估 Q1-Q10 补六段式答案
 
@@ -48,11 +47,16 @@
 - [x] 02-tech/B-ai-tech（上下文工程/Agent记忆/Agent评估）— intro块+互动练习+检查点
 - [x] 02-tech/C-communication（PRD模板/技术方案评审）— intro块+互动练习+检查点
 - [x] 04-product（设计方法论/指标体系/AI体验设计）— intro块+互动练习+检查点
+- [x] 01-foundation 4页、02-tech/A-coding 2页 — 已确认具备互动练习和检查点（无需改造）
+
+**遗留缺口清理 ✅**
+- [x] style.css 补充 intro/exercise/tip/warning custom-block 样式（修复线上无样式问题）
+- [x] 06-career/06-portfolio.md 完整内容（4类作品写法+平台选择+模板+Checklist）
+- [x] 02b-resume-examples.md 加入侧边栏导航
+- [x] 02-tech/index.md 清除过时的"建设中"文案
 
 ## 下一步任务
 
-1. **[P1] 01-foundation 4个页面补充互动练习和检查点**（已有 intro 块，缺练习题）
-2. **[P1] 02-tech/A-coding 2个页面补充互动练习和检查点**（已有 intro 块，缺练习题）
-3. **[P2] 部署更新后的内容到 GitHub Pages**（`git push` 触发 Actions）
-4. **[P2] 验证站点线上效果，检查 custom-block 样式是否正常渲染**
-5. **[P3] 优化 TrendRadar 组件的交互体验**
+1. **[P1] 验证线上样式**：确认 custom-block 样式（intro/exercise/tip/warning）在 04-product 和 02-tech 各页正常渲染
+2. **[P2] 优化 TrendRadar 组件交互体验**（具体需求待确认）
+3. **[P3] 新增内容方向待定**（面试真题补充 / 03-resources 扩充 / 新增模块）
