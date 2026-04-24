@@ -119,6 +119,7 @@ export default defineConfig({
             { text: '概览', link: '/06-career/' },
             { text: '📍 职业路径规划', link: '/06-career/01-career-path' },
             { text: '📄 简历撰写指南', link: '/06-career/02-resume-guide' },
+            { text: '📋 简历范文示例', link: '/06-career/02b-resume-examples' },
             { text: '✨ AI 简历润色器', link: '/06-career/03-resume-polish' },
             { text: '🎤 面试逐字稿生成器', link: '/06-career/04-interview-script' },
             { text: '🤖 AI 模拟面试', link: '/06-career/05-mock-interview' },
