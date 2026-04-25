@@ -24,11 +24,11 @@ features:
     link: /02-tech/
   - icon: 🗺️
     title: 03 行业资源导航
-    details: 框架生态 / 案例库 / 竞品分析 / 阅读清单
+    details: 框架生态 / 案例库 / 竞品分析（含 AI 分析工具）/ 阅读清单
     link: /03-resources/
   - icon: 🛠️
     title: 04 产品实战层
-    details: 设计方法论 / PRD 模板 / 指标体系 / Vibe Coding 项目
+    details: 设计方法论（含 AI PRD 生成）/ 指标体系 / Vibe Coding 项目
     link: /04-product/
   - icon: 🎯
     title: 05 面试题库 PM 版
