@@ -51,7 +51,11 @@ def write_file(path: str, content: str):
 
 
 def generate_trends(year: int, month: int) -> str:
-    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    base_url = os.environ.get("ANTHROPIC_BASE_URL")
+    client = anthropic.Anthropic(
+        api_key=os.environ["ANTHROPIC_API_KEY"],
+        **({"base_url": base_url} if base_url else {}),
+    )
 
     system = SYSTEM_PROMPT.format(year=year, month=month)
     user = USER_PROMPT.format(year=year, month=month)
