@@ -17,27 +17,36 @@ SYSTEM_PROMPT = """你是一位专注 AI 产品经理求职辅导的专家，熟
 
 每道题严格遵循六段式结构：
 - 难度和考察公司标注
-- **③ 标准答案**（300字以上，含表格/框架）
-- **④ 前沿加分回答**（必须引用{year}年的具体产品/论文/事件）
-- **⑤ 常见踩坑点**（3-4条，用 ❌ 开头）
+- **③ 标准答案**（200字以上，可含表格/框架）
+- **④ 前沿加分回答**（引用{year}年的具体产品/论文/事件，100字以内）
+- **⑤ 常见踩坑点**（3条，用 ❌ 开头）
 - **⑥ 回答策略**（开场句 + 时间分配 + 追问预判）
 
-输出格式要求：
-- 直接输出 Markdown，不要有任何前言或解释
-- 章节标题格式：## 第一部分：xxx / ## 第二部分：xxx / ## 第三部分：xxx
-- 题目格式：**Q1：题目内容**
-- 每题之间用 --- 分隔
-- 共 9 道题，分布：第一部分4题（技术演进）、第二部分2题（数据与训练）、第三部分3题（应用落地）"""
+输出格式：直接输出 Markdown，不要有任何前言或解释，题目格式：**Q{n}：题目**，每题之间用 --- 分隔。"""
 
-USER_PROMPT = """请为 {year}年{month}月 生成 9 道 AI PM 面试前沿趋势开放题。
+PROMPT_PART1 = """请为 {year}年{month}月 生成以下 5 道 AI PM 面试前沿趋势题：
 
-要求：
-1. 题目必须反映 {year} 年的最新动态（如推理模型、多模态、Agent 标准化、开源模型等方向的最新进展）
-2. ④前沿加分部分必须引用具体的、{year}年真实存在的产品/研究/事件
-3. 覆盖三个部分：技术演进与架构（4题）、数据与训练（2题）、应用落地与挑战（3题）
-4. 难度标注格式：- 难度：⭐⭐⭐ | 公司：字节、阿里等（根据题目相关性填写）
+## 第一部分：技术演进与架构
 
-直接输出 9 道题的 Markdown 内容，从 ## 第一部分 开始。"""
+生成 Q1、Q2、Q3、Q4 共 4 道题，主题围绕：推理模型/多模态/开源模型竞争/Agent标准化等{year}年最新进展。
+
+## 第二部分：数据与训练
+
+生成 Q5 共 1 道题，主题围绕：合成数据/训练范式/数据飞轮等方向。
+
+从 ## 第一部分 开始直接输出，不要有前言。"""
+
+PROMPT_PART2 = """请为 {year}年{month}月 继续生成以下 4 道 AI PM 面试前沿趋势题：
+
+## 第二部分：数据与训练（续）
+
+生成 Q6 共 1 道题，主题围绕：数据质量/标注/评估数据集等方向。
+
+## 第三部分：应用落地与挑战
+
+生成 Q7、Q8、Q9 共 3 道题，主题围绕：具身智能/隐私安全/行业颠覆性应用等{year}年落地案例。
+
+从 ## 第二部分（续） 开始直接输出，不要有前言。"""
 
 
 def read_file(path: str) -> str:
@@ -50,6 +59,16 @@ def write_file(path: str, content: str):
         f.write(content)
 
 
+def call_api(client, system: str, user: str) -> str:
+    message = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=8192,
+        system=system,
+        messages=[{"role": "user", "content": user}],
+    )
+    return message.content[0].text
+
+
 def generate_trends(year: int, month: int) -> str:
     base_url = os.environ.get("ANTHROPIC_BASE_URL")
     client = anthropic.Anthropic(
@@ -58,26 +77,25 @@ def generate_trends(year: int, month: int) -> str:
     )
 
     system = SYSTEM_PROMPT.format(year=year, month=month)
-    user = USER_PROMPT.format(year=year, month=month)
 
-    print(f"调用 Claude API 生成 {year}年{month}月 趋势题...")
-    message = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=16000,
-        system=system,
-        messages=[{"role": "user", "content": user}],
-    )
-    result = message.content[0].text
+    print(f"第1次调用：生成第一/二部分（Q1-Q5）...")
+    part1 = call_api(client, system, PROMPT_PART1.format(year=year, month=month))
+    q1 = part1.count("**Q")
+    print(f"  → 生成 {q1} 道题")
 
-    # 校验完整性：必须包含三个部分和至少 9 道题
-    parts = [f"## 第{p}部分" for p in ["一", "二", "三"]]
-    missing_parts = [p for p in parts if p not in result]
-    q_count = result.count("**Q")
-    if missing_parts or q_count < 8:
-        print(f"ERROR: 生成内容不完整（缺少 {missing_parts}，题目数={q_count}），跳过更新")
+    print(f"第2次调用：生成第二/三部分（Q6-Q9）...")
+    part2 = call_api(client, system, PROMPT_PART2.format(year=year, month=month))
+    q2 = part2.count("**Q")
+    print(f"  → 生成 {q2} 道题")
+
+    result = part1.strip() + "\n\n---\n\n" + part2.strip()
+    q_total = result.count("**Q")
+
+    if q_total < 8:
+        print(f"ERROR: 生成题目数不足（共 {q_total} 道），跳过更新")
         sys.exit(1)
 
-    print(f"✓ 生成完成，共 {q_count} 道题")
+    print(f"✓ 生成完成，共 {q_total} 道题")
     return result
 
 
