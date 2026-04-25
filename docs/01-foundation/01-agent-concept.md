@@ -555,7 +555,7 @@ Agent："为您推荐 3 个航班"
 
 - [大模型原理（PM版）](./02-llm-principles) - 理解 LLM 的工作原理
 - [AI PM 技术边界](./04-pm-tech-boundary) - 掌握成本估算和方案评审
-- [面试题库 - Agent 部分](../05-interview/02-high-prob#agent-22题) - 练习 Agent 相关面试题
+- [面试题库 - Agent 部分](../05-interview/02-high-prob#二、agent-核心方向22题) - 练习 Agent 相关面试题
 
 ### 实战任务
 

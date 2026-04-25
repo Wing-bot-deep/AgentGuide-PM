@@ -623,7 +623,7 @@ Temperature = 1.5（高随机）：
 
 - [Agent 是什么](./01-agent-concept) - 理解 Agent 的核心能力
 - [AI PM 技术边界](./04-pm-tech-boundary) - 掌握成本估算和方案评审
-- [面试题库 - 模型评估部分](../05-interview/02-high-prob#模型评估-10题) - 练习相关面试题
+- [面试题库 - 模型评估部分](../05-interview/02-high-prob#三、模型评估方向10题) - 练习相关面试题
 
 ### 实战任务
 
