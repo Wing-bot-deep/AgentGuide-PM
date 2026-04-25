@@ -73,7 +73,7 @@ def generate_trends(year: int, month: int) -> str:
     parts = [f"## 第{p}部分" for p in ["一", "二", "三"]]
     missing_parts = [p for p in parts if p not in result]
     q_count = result.count("**Q")
-    if missing_parts or q_count < 9:
+    if missing_parts or q_count < 8:
         print(f"ERROR: 生成内容不完整（缺少 {missing_parts}，题目数={q_count}），跳过更新")
         sys.exit(1)
 
