@@ -104,7 +104,16 @@ export default defineConfig({
           items: [
             { text: '概览', link: '/05-interview/' },
             { text: '🔴 必考题精讲', link: '/05-interview/01-must-know' },
-            { text: '🟠 高概率题库', link: '/05-interview/02-high-prob' },
+            {
+              text: '🟠 高概率题库',
+              collapsed: false,
+              items: [
+                { text: '总览', link: '/05-interview/02-high-prob' },
+                { text: '🔍 RAG 系统方向（22题）', link: '/05-interview/02a-rag' },
+                { text: '🤖 Agent 核心方向（22题）', link: '/05-interview/02b-agent' },
+                { text: '📊 模型评估方向（10题）', link: '/05-interview/02c-evaluation' },
+              ],
+            },
             { text: '🟡 潜力题 & 场景题', link: '/05-interview/03-potential' },
             { text: '🔵 前沿趋势开放题', link: '/05-interview/04-trends' },
             { text: '🏢 大厂面试规律', link: '/05-interview/05-company-cases' },
