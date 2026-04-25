@@ -63,11 +63,22 @@ def generate_trends(year: int, month: int) -> str:
     print(f"调用 Claude API 生成 {year}年{month}月 趋势题...")
     message = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=8192,
+        max_tokens=16000,
         system=system,
         messages=[{"role": "user", "content": user}],
     )
-    return message.content[0].text
+    result = message.content[0].text
+
+    # 校验完整性：必须包含三个部分和至少 9 道题
+    parts = [f"## 第{p}部分" for p in ["一", "二", "三"]]
+    missing_parts = [p for p in parts if p not in result]
+    q_count = result.count("**Q")
+    if missing_parts or q_count < 9:
+        print(f"ERROR: 生成内容不完整（缺少 {missing_parts}，题目数={q_count}），跳过更新")
+        sys.exit(1)
+
+    print(f"✓ 生成完成，共 {q_count} 道题")
+    return result
 
 
 def update_trends_file(new_questions: str, year: int, month: int):
