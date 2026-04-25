@@ -89,6 +89,8 @@ def generate_trends(year: int, month: int) -> str:
     print(f"  → 生成 {q2} 道题")
 
     result = part1.strip() + "\n\n---\n\n" + part2.strip()
+    # 去掉拼接产生的重复"第二部分（续）"标题
+    result = re.sub(r"\n+## 第二部分[^\n]*（续）[^\n]*\n+", "\n\n", result)
     q_total = result.count("**Q")
 
     if q_total < 8:
