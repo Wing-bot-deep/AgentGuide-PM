@@ -26,6 +26,7 @@
 - [x] 06-career/06-portfolio.md Type 2 加具体 Prompt 示例（面试反馈生成器）
 - [x] 修复 tools.md 三个死链（前沿速递雷达/竞品分析辅助/API Key 锚点）
 - [x] 四个大文件加顶部目录锚点（01-must-know / 02a-rag / 02b-agent / 02c-evaluation）
+- [x] README.md 完全改写为 AgentGuide-PM 版本（替换原 fork 的工程师向内容）
 
 ## 下一步任务
 
