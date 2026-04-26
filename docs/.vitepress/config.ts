@@ -108,7 +108,6 @@ export default defineConfig({
               text: '🟠 高概率题库',
               collapsed: false,
               items: [
-                { text: '总览', link: '/05-interview/02-high-prob' },
                 { text: '🔍 RAG 系统方向（22题）', link: '/05-interview/02a-rag' },
                 { text: '🤖 Agent 核心方向（22题）', link: '/05-interview/02b-agent' },
                 { text: '📊 模型评估方向（10题）', link: '/05-interview/02c-evaluation' },

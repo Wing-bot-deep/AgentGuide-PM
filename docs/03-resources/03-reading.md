@@ -9,6 +9,42 @@ description: AI PM 的持续学习信息源——博客、Newsletter、播客、
 
 ---
 
+## 按情况快速选择
+
+<div class="card-grid">
+
+<div class="nav-card">
+
+### 🚀 备战面试中（时间紧）
+**每天 5 分钟**：TLDR AI（通勤扫）  
+**每周 1 篇**：The Batch 或量子位深度文章  
+**论文**：只看 InstructGPT + ReAct 的 Abstract  
+**书**：《Co-Intelligence》优先，边读边用
+
+</div>
+
+<div class="nav-card">
+
+### 🔄 转型 AI PM（需要建框架）
+**先读书**：吴恩达 AI for Everyone（Coursera 免费）  
+**再看**：Anthropic Blog + OpenAI Blog，感受产品叙事方式  
+**写文章**：输出 1-2 篇技术理解文章，倒逼理解深度
+
+</div>
+
+<div class="nav-card">
+
+### 📈 已有经验（保持前沿感知）
+**固定订阅**：The Batch + Lenny's Newsletter  
+**X / Twitter**：关注 @sama @karpathy，一手观点  
+**论文**：Papers With Code 每周看热榜 Top 3 摘要
+
+</div>
+
+</div>
+
+---
+
 ## 一级信息源（模型厂商官方）
 
 最权威的 AI 动态来自这里，发布了什么才是真实进展：
