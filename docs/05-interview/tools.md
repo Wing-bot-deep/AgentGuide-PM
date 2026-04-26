@@ -27,7 +27,7 @@ description: 全站 AI 工具汇总——押题、逐字稿、模拟面试、简
 <div class="nav-card">
 
 ### 🔭 前沿趋势速递
-[打开工具 →](./04-trends#前沿速递雷达)
+[打开工具 →](./04-trends#ai-前沿速递雷达)
 
 输入你关注的 AI 方向，生成最新前沿动态摘要 + 面试加分点提炼。
 
@@ -87,7 +87,7 @@ description: 全站 AI 工具汇总——押题、逐字稿、模拟面试、简
 <div class="nav-card">
 
 ### 🏢 竞品分析辅助
-[打开工具 →](../03-resources/02-cases#竞品分析辅助)
+[打开工具 →](../03-resources/02-cases#ai-竞品分析辅助)
 
 输入目标产品，AI 生成结构化竞品分析框架，帮你准备"你用过哪些 AI 产品"类问题。
 
@@ -101,5 +101,5 @@ description: 全站 AI 工具汇总——押题、逐字稿、模拟面试、简
 
 ::: tip API Key 配置
 所有工具需要配置 API Key 才能使用。Key 仅存储在本地浏览器，不会上传服务器。支持 Claude / OpenAI / 兼容 API。
-[→ 去配置 API Key](./index#api-key-配置)
+[→ 去配置 API Key](./index)
 :::
