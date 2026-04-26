@@ -79,26 +79,60 @@ AI PM 简历的核心结构、量化表达技巧、高频关键词清单，附 3
 
 ## 求职全流程时间线
 
-```
-Week 1-2   职业定位 + 简历打磨
-           → 明确目标岗位方向（B/C/平台型 AI PM）
-           → 用简历润色器优化简历
-           → 整理 3-5 个项目案例（STAR 结构）
+<div class="timeline">
 
-Week 3-4   投递 + 面试准备
-           → 批量投递目标公司
-           → 用 JD 押题器针对每个 JD 定制题目
-           → 用逐字稿生成器准备自我介绍和项目介绍
+<div class="timeline-item">
+<div class="timeline-week">Week 1–2</div>
+<div class="timeline-content">
 
-Week 5-6   面试冲刺
-           → 每天 1-2 场模拟面试
-           → 及时复盘诊断报告，针对性补强
-           → 持续关注前沿速递，准备前沿题答案
+**职业定位 + 简历打磨**
 
-Week 7+    拿到 Offer
-           → 多 offer 对比方法论
-           → 薪资谈判逐字稿
-```
+- 明确目标方向：[B端 / C端 / 平台型 AI PM](./01-career-path)
+- 阅读 [AI PM 简历撰写指南](./02-resume-guide)，整理 3–5 个项目（STAR 结构）
+- 用 [✨ AI 简历润色器](./03-resume-polish) 逐模块优化表达
+
+</div>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-week">Week 3–4</div>
+<div class="timeline-content">
+
+**投递 + 面试准备**
+
+- 批量投递目标公司，收集 JD
+- 每份 JD 跑一遍 [🎯 JD 智能押题器](../05-interview/index#jd-智能押题器)，定制 18 道题
+- 用 [🎤 逐字稿生成器](./04-interview-script) 准备自我介绍 + 项目介绍
+
+</div>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-week">Week 5–6</div>
+<div class="timeline-content">
+
+**面试冲刺**
+
+- 每天 1–2 场 [🤖 AI 模拟面试](./05-mock-interview)，模拟真实面试压力
+- 认真阅读五维诊断报告，针对弱项专项补强
+- 关注 [🔭 前沿速递](../05-interview/04-trends)，准备前沿题答案
+
+</div>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-week">Week 7+</div>
+<div class="timeline-content">
+
+**拿到 Offer**
+
+- 阅读 [多 Offer 对比方法论](./07-salary)
+- 用 [谈薪逐字稿](./07-salary) 准备薪资谈判
+
+</div>
+</div>
+
+</div>
 
 ---
 
